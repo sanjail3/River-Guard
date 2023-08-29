@@ -1,0 +1,25 @@
+[data-testid="stAppViewContainer"] > .main {
+    background-color: #00FFFF; /* Change to your desired background color */
+}
+
+/* Change secondary background color */
+[data-testid="stSidebar"] > div:first-child {
+    background-color: #00FFFF; /* Change to your desired secondary background color */
+}
+
+[data-testid="stAppHeader"] h1 {
+    color: #000000; /* Change to your desired header text color */
+}
+
+[data-testid="app"] .stMenuItem {
+    color: #008000; /* Change to your desired menu item color */
+}
+
+.streamlit-header {
+    color: black; /* Change to your desired font color */
+}
+
+.streamlit-write {
+    color: black; /* Change to your desired font color */
+}
+
