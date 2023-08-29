@@ -1,0 +1,45 @@
+name: Deploy to Azure
+
+on:
+  push:
+    branches:
+      - main  # Change this to your main branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Build and push Docker image
+      env:
+        ACR_LOGIN_SERVER: <ACR_LOGIN_SERVER>
+        IMAGE_NAME: <IMAGE_NAME>
+      run: |
+        docker build -t $ACR_LOGIN_SERVER/$IMAGE_NAME:$GITHUB_SHA .
+        docker login $ACR_LOGIN_SERVER -u $ACR_USERNAME -p $ACR_PASSWORD
+        docker push $ACR_LOGIN_SERVER/$IMAGE_NAME:$GITHUB_SHA
+
+    - name: Deploy to Azure App Service
+      env:
+        DOCKER_IMAGE: ${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+        ACR_LOGIN_SERVER: <ACR_LOGIN_SERVER>
+        SERVICE_PRINCIPAL_ID: <SERVICE_PRINCIPAL_ID>
+        SERVICE_PRINCIPAL_SECRET: <SERVICE_PRINCIPAL_SECRET>
+        TENANT_ID: <TENANT_ID>
+        APP_NAME: <APP_NAME>
+        RESOURCE_GROUP_NAME: <RESOURCE_GROUP_NAME>
+      run: |
+        az login --service-principal -u $SERVICE_PRINCIPAL_ID -p $SERVICE_PRINCIPAL_SECRET --tenant $TENANT_ID
+        az webapp config container set -n $APP_NAME -g $RESOURCE_GROUP_NAME --docker-custom-image-name $DOCKER_IMAGE --docker-registry-server-url https://$ACR_LOGIN_SERVER --docker-registry-server-user $SERVICE_PRINCIPAL_ID --docker-registry-server-password $SERVICE_PRINCIPAL_SECRET
