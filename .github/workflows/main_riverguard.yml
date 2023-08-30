@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'riverguard'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8A62A257A0EF4439977B177435279F20 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2BAE737144CA4F349EA468DEB08C8D3B }}
