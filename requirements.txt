@@ -1,6 +1,5 @@
 # Usage: pip install -r requirements.txt
 matplotlib>=3.3
-onnxruntime
 exif
 numpy>=1.18.5
 opencv-python>=4.1.1
