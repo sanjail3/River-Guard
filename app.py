@@ -9,7 +9,7 @@ from marker_cluster import MarkerClusterPage
 from dashboard import DashBoard
 import requests
 from io import BytesIO
-from realtime import realtime
+
 
 # Define a function to set a background image
 def set_background(image_url):
