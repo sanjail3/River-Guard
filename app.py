@@ -81,9 +81,9 @@ def main():
         except:
             st.warning("OOPS :) Something went wrong...!")
 
-    elif selected == "RealTime":
-        # If "RealTime" option is selected, call the realtime() function
-        realtime()
+    # elif selected == "RealTime":
+    #     # If "RealTime" option is selected, call the realtime() function
+    #     realtime()
 
 # Check if the script is being run directly
 if __name__ == '__main__':
