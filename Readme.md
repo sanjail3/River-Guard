@@ -1,4 +1,4 @@
-## Building Plastic Free Rivers with AI hackathon conducted by Reva University
+## Building Plastic Free Rivers with AI hackathon
 
 --------------------------------------
 
